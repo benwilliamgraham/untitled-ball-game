@@ -1,5 +1,7 @@
 "use strict";
 
+import Renderer from "./renderer.js"
+
 class Game {
   constructor(canvas, renderer) {
     this.canvas = canvas;
@@ -30,3 +32,5 @@ class Game {
     requestAnimationFrame(gameLoop);
   }
 }
+
+export default Game;
