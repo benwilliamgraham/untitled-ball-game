@@ -1,19 +1,10 @@
 #version 300 es
 
-uniform mat4 uMVPMatrix;
-uniform vec3 uVolumeSize;
-uniform vec3 uCameraPosition;
+in vec2 aPos;
 
-in vec4 aPosition;
-
-out vec3 vVolumeSize;   // The volume's size
-out vec3 vIntersection; // The ray's starting position in volume space
-out vec3 vCameraPosition;    // The camera's position in volume space
+out vec2 vTexCoord;
 
 void main() {
-    vVolumeSize = uVolumeSize;
-    vIntersection = aPosition.xyz * uVolumeSize;
-    vCameraPosition = uCameraPosition;
-    vec3 pos = vIntersection;
-    gl_Position = uMVPMatrix * vec4(pos, 1.0);
+    gl_Position = vec4(aPos, 0.0, 1.0);
+    vTexCoord = vec2(aPos.x, 1.0 - aPos.y);
 }
