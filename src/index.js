@@ -1,3 +1,5 @@
+"use strict";
+
 const gameWidth = 600;
 const gameHeight = 800;
 
