@@ -9,10 +9,6 @@ class Sprite {
         this.rot = rot;
         this.texture = texture;
     }
-
-    update(dt) {
-        // Sprite subclass should implement this
-    }
 };
 
 export default Sprite;

@@ -12,7 +12,9 @@ class Game {
 
     this.scene = new Scene(renderer);
 
-    this.scene.sprites.add(new Ball(100, 10, 10, 0, renderer.getTexture("src/textures/a.png")));
+    this.balls = new Set();
+
+    this.scene.sprites.add(new Ball(100, 100, 100, 0, renderer.getTexture("src/textures/a.png")));
   }
 
   static async init(canvas) {
@@ -28,10 +30,12 @@ class Game {
       const dt = (time - lastTime) % 1000; // Prevents delta time from getting too large
       lastTime = time;
 
-      scene.update(dt);
+      // Apply physics
 
+      // Render scene
       renderer.render(scene);
 
+      // Request next frame
       requestAnimationFrame(gameLoop);
     }
 
