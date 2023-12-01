@@ -12,7 +12,7 @@ class Game {
 
     this.scene = new Scene(renderer);
 
-    this.scene.sprites.add(new Ball(100, 100, 10, 10, 0, renderer.getTexture("src/textures/a.png")));
+    this.scene.sprites.add(new Ball(100, 10, 10, 0, renderer.getTexture("src/textures/a.png")));
   }
 
   static async init(canvas) {

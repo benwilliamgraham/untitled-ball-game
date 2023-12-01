@@ -3,13 +3,12 @@
 import Sprite from "./sprite.js"
 
 class Ball extends Sprite {
-    constructor(width, height, x, y, rot, texture) {
-        super(width, height, x, y, rot, texture);
+    constructor(radius, x, y, rot, texture) {
+        super(radius, radius, x, y, rot, texture);
     }
 
     update(dt) {
-        this.x += 0.1 * dt;
-        this.y += 0.1 * dt;
+        this.rot += 0.001 * dt;
     }
 }
 

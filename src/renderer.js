@@ -40,17 +40,17 @@ class Renderer {
     // 0---1
     const vertices = [
       // 0
-      0, 0,
+      -0.5, -0.5,
       // 2
-      0, 1,
+      -0.5, 0.5,
       // 3
-      1, 1,
+      0.5, 0.5,
       // 0
-      0, 0,
+      -0.5, -0.5,
       // 3
-      1, 1,
+      0.5, 0.5,
       // 1
-      1, 0,
+      0.5, -0.5,
     ];
     const spriteBuffer = new Buffer(gl, vertices);
 
