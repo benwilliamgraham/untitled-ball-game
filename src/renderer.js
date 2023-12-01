@@ -73,7 +73,7 @@ class Renderer {
   }
 
   
-  render(camera, scene) {
+  render(scene) {
     const { gl, spriteProgram, viewProgram, spriteBuffer } = this;
 
     // Clear screen
@@ -97,9 +97,6 @@ class Renderer {
       0,
       0
     );
-
-    // Set camera uniforms
-    gl.uniformMatrix3fv(spriteProgram.uniforms.uViewMat, false, camera.viewMat);
 
     // Render sprites
     for (const sprite of scene.sprites) {
