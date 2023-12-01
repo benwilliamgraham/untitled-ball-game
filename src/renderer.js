@@ -31,7 +31,7 @@ class Renderer {
       "src/shaders/sprite.vert",
       "src/shaders/sprite.frag",
       ["aPos"],
-      ["uModelMat", "uViewMat", "uDepth"]
+      ["uResolution", "uDimensions", "uPosition", "uRotation", "uTexture"]
     );
 
     // Create buffers
@@ -97,9 +97,19 @@ class Renderer {
       0
     );
 
+    // Set resolution uniform
+    gl.uniform2f(
+      spriteProgram.uniforms.uResolution,
+      this.canvas.width,
+      this.canvas.height
+    );
+
     // Render sprites
     for (const sprite of scene.sprites) {
       // Set sprite uniforms
+      gl.uniform2f(spriteProgram.uniforms.uDimensions, sprite.width, sprite.height);
+      gl.uniform2f(spriteProgram.uniforms.uPosition, sprite.x, sprite.y);
+      gl.uniform1f(spriteProgram.uniforms.uRotation, sprite.rot);
 
       gl.activeTexture(gl.TEXTURE0);
       gl.bindTexture(gl.TEXTURE_2D, sprite.texture.id);

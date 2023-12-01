@@ -3,6 +3,7 @@
 import Renderer from "./renderer.js"
 import Scene from "./scene.js"
 import Sprite from "./sprite.js"
+import Ball from "./ball.js"
 
 class Game {
   constructor(canvas, renderer) {
@@ -11,7 +12,7 @@ class Game {
 
     this.scene = new Scene(renderer);
 
-    this.scene.sprites.add(new Sprite(100, 100, 10, 10, 0, renderer.getTexture("src/textures/a.png")));
+    this.scene.sprites.add(new Ball(100, 100, 10, 10, 0, renderer.getTexture("src/textures/a.png")));
   }
 
   static async init(canvas) {
