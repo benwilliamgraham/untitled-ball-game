@@ -74,14 +74,13 @@ class Renderer {
 
   
   render(scene) {
-    const { gl, spriteProgram, viewProgram, spriteBuffer } = this;
+    const { gl, spriteProgram, spriteBuffer } = this;
 
     // Clear screen
     gl.clearColor(0, 0, 0, 1);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-    gl.enable(gl.DEPTH_TEST);
 
     // Use sprite program
     gl.useProgram(spriteProgram.program);
@@ -101,12 +100,6 @@ class Renderer {
     // Render sprites
     for (const sprite of scene.sprites) {
       // Set sprite uniforms
-      gl.uniformMatrix3fv(
-        spriteProgram.uniforms.uModelMat,
-        false,
-        sprite.modelMat
-      );
-      gl.uniform1f(spriteProgram.uniforms.uDepth, sprite.depth);
 
       gl.activeTexture(gl.TEXTURE0);
       gl.bindTexture(gl.TEXTURE_2D, sprite.texture.id);

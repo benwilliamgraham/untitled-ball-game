@@ -2,6 +2,7 @@
 
 import Renderer from "./renderer.js"
 import Scene from "./scene.js"
+import Sprite from "./sprite.js"
 
 class Game {
   constructor(canvas, renderer) {
@@ -9,6 +10,8 @@ class Game {
     this.renderer = renderer;
 
     this.scene = new Scene(renderer);
+
+    this.scene.sprites.add(new Sprite(100, 100, 10, 10, 0, renderer.getTexture("src/textures/a.png")));
   }
 
   static async init(canvas) {
@@ -23,6 +26,8 @@ class Game {
     function gameLoop(time) {
       const dt = (time - lastTime) % 1000; // Prevents delta time from getting too large
       lastTime = time;
+
+      scene.update(dt);
 
       renderer.render(scene);
 
