@@ -57,12 +57,18 @@ class Game {
 
     // Setup input
     canvas.addEventListener("click", (event) => {
+      if (nextBall === null) {
+        return;
+      }
+
       const rect = canvas.getBoundingClientRect();
       const x = event.clientX - rect.left;
 
       nextBall.x = x;
       balls.add(nextBall);
-      createNextBall();
+      nextBall = null;
+
+      setTimeout(createNextBall, 400);
     });
 
     // Create physics loop
@@ -129,10 +135,10 @@ class Game {
         // Separate the balls
         const overlap = a.radius + b.radius - distance;
 
-        a.x -= overlap * normalX * 0.5;
-        a.y -= overlap * normalY * 0.5;
-        b.x += overlap * normalX * 0.5;
-        b.y += overlap * normalY * 0.5;
+        a.x -= overlap * normalX * 0.4;
+        a.y -= overlap * normalY * 0.4;
+        b.x += overlap * normalX * 0.4;
+        b.y += overlap * normalY * 0.4;
 
         // Calculate the relative velocity
         const relVelX = b.velX - a.velX;
