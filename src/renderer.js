@@ -77,7 +77,7 @@ class Renderer {
     const { gl, spriteProgram, spriteBuffer } = this;
 
     // Clear screen
-    gl.clearColor(0, 0, 0, 1);
+    gl.clearColor(179 / 255, 158 / 255, 127 / 255, 1);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);

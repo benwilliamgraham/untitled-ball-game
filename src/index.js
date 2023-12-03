@@ -3,13 +3,14 @@
 import Game from "./game.js";
 
 // Setup document
-document.body.style.backgroundColor = "tan";
+document.body.style.backgroundColor = "rgb(219, 189, 145)";
 
 // Setup  canvas
 const canvas = document.createElement("canvas");
 canvas.style.position = "absolute";
 canvas.style.top = "0";
 canvas.style.left = "0";
+canvas.style.borderRadius = "10px";
 canvas.width = 600;
 canvas.height = 800;
 document.body.appendChild(canvas);
