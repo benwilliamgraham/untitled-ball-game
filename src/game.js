@@ -25,40 +25,49 @@ class Game {
 
     // Create ball hierarchy
     const levelHeirarchy = [
-      { radius: 20, texture: renderer.getTexture("src/textures/0.png") },
-      { radius: 25, texture: renderer.getTexture("src/textures/1.png") },
-      { radius: 30, texture: renderer.getTexture("src/textures/2.png") },
-      { radius: 35, texture: renderer.getTexture("src/textures/3.png") },
-      { radius: 40, texture: renderer.getTexture("src/textures/4.png") },
-      { radius: 45, texture: renderer.getTexture("src/textures/5.png") },
-      { radius: 50, texture: renderer.getTexture("src/textures/6.png") },
-      { radius: 55, texture: renderer.getTexture("src/textures/7.png") },
-      { radius: 60, texture: renderer.getTexture("src/textures/8.png") },
-      { radius: 65, texture: renderer.getTexture("src/textures/9.png") },
-      { radius: 70, texture: renderer.getTexture("src/textures/10.png") },
+      { radius: 30, texture: renderer.getTexture("src/textures/0.png") },
+      { radius: 40, texture: renderer.getTexture("src/textures/1.png") },
+      { radius: 50, texture: renderer.getTexture("src/textures/2.png") },
+      { radius: 60, texture: renderer.getTexture("src/textures/3.png") },
+      { radius: 70, texture: renderer.getTexture("src/textures/4.png") },
+      { radius: 80, texture: renderer.getTexture("src/textures/5.png") },
+      { radius: 90, texture: renderer.getTexture("src/textures/6.png") },
+      { radius: 100, texture: renderer.getTexture("src/textures/7.png") },
+      { radius: 110, texture: renderer.getTexture("src/textures/8.png") },
+      { radius: 120, texture: renderer.getTexture("src/textures/9.png") },
+      { radius: 130, texture: renderer.getTexture("src/textures/10.png") },
     ];
+
+    // Create dropper ball
+    const dropHeight = canvas.height - 75;
+    let nextBall;
+    
+    function createNextBall() {
+      const level = Math.floor(Math.random() * 6);
+      nextBall = new Ball(
+        level,
+        levelHeirarchy[level].radius,
+        canvas.width / 2,
+        dropHeight,
+        levelHeirarchy[level].texture
+      );
+      scene.sprites.add(nextBall);
+    }
+    createNextBall();
 
     // Setup input
     canvas.addEventListener("click", (event) => {
       const rect = canvas.getBoundingClientRect();
       const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
 
-      const level = Math.floor(Math.random() * 11);
-      const ball = new Ball(
-        level,
-        levelHeirarchy[level].radius,
-        x,
-        canvas.height - y,
-        levelHeirarchy[level].texture
-      );
-      balls.add(ball);
-      scene.sprites.add(ball);
+      nextBall.x = x;
+      balls.add(nextBall);
+      createNextBall();
     });
 
     // Create physics loop
     function updatePhysics(dt) {
-      const restitution = 0.7;
+      const restitution = 0.4;
 
       // Apply gravity and update position
       for (const ball of balls) {
