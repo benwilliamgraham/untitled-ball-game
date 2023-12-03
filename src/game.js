@@ -30,11 +30,10 @@ class Game {
       const y = event.clientY - rect.top;
 
       const ball = new Ball(
-        100,
+        Math.floor(Math.random() * 11),
         x,
         canvas.height - y,
-        0,
-        renderer.getTexture("src/textures/a.png")
+        renderer
       );
       balls.add(ball);
       scene.sprites.add(ball);
@@ -140,7 +139,7 @@ class Game {
       accumulator += dt;
 
       // Apply physics
-      const step = 1000 / 512;
+      const step = 1000 / 256;
       while (accumulator > step) {
         updatePhysics(step);
 
