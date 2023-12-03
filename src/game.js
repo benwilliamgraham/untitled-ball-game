@@ -23,6 +23,18 @@ class Game {
   play() {
     const { canvas, renderer, scene, balls } = this;
 
+    // Create floor
+    const floorHeight = 20;
+    const floor = new Sprite(
+      canvas.width,
+      floorHeight,
+      canvas.width / 2,
+      floorHeight / 2,
+      0,
+      renderer.getTexture("src/textures/solid.png")
+    );
+    scene.sprites.add(floor);
+
     // Create ball hierarchy
     const levelHeirarchy = [
       { radius: 30, texture: renderer.getTexture("src/textures/0.png") },
@@ -86,8 +98,8 @@ class Game {
       // Check for collisions with the floor and walls
       for (const ball of balls) {
         // Check if the ball has left the bounds of the screen
-        if (ball.y - ball.radius < 10) {
-          ball.y = 10 + ball.radius;
+        if (ball.y - ball.radius < floorHeight) {
+          ball.y = floorHeight + ball.radius;
           ball.velY = -ball.velY * restitution;
         }
         if (ball.x - ball.radius < 0) {
