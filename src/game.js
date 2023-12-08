@@ -4,6 +4,7 @@ import Renderer from "./renderer.js";
 import Scene from "./scene.js";
 import Sprite from "./sprite.js";
 import Ball from "./ball.js";
+import Particle from "./particle.js";
 
 class Game {
   constructor(canvas, renderer) {
@@ -13,6 +14,7 @@ class Game {
     this.scene = new Scene(renderer);
 
     this.balls = new Set();
+    this.particles = new Set();
   }
 
   static async init(canvas) {
@@ -21,7 +23,7 @@ class Game {
   }
 
   play() {
-    const { canvas, renderer, scene, balls } = this;
+    const { canvas, renderer, scene, balls, particles } = this;
 
     // Create floor
     const floorHeight = 20;
@@ -49,6 +51,9 @@ class Game {
       { radius: 120, texture: renderer.getTexture("src/textures/9.png") },
       { radius: 130, texture: renderer.getTexture("src/textures/10.png") },
     ];
+
+    // Create particle texture
+    const particleTexture = renderer.getTexture("src/textures/0.png");
 
     // Create dropper ball
     const dropHeight = canvas.height - 75;
@@ -86,10 +91,11 @@ class Game {
     // Create physics loop
     function updatePhysics(dt) {
       const restitution = 0.4;
+      const gravity = 0.001;
 
       // Apply gravity and update position
       for (const ball of balls) {
-        ball.velY -= 0.001 * dt;
+        ball.velY -= gravity * dt;
 
         ball.x += ball.velX * dt;
         ball.y += ball.velY * dt;
@@ -198,6 +204,29 @@ class Game {
         );
         balls.add(ball);
         scene.sprites.add(ball);
+
+        // Create particles
+        for (let i = 0; i < (a.radius + b.radius) / 5; i++) {
+          const particle = new Particle(
+            x,
+            y,
+            particleTexture
+          );
+          const direction = Math.random() * Math.PI * 2;
+          const magnitude = Math.random() * 0.3 + 0.3;
+          particle.velX = Math.cos(direction) * magnitude;
+          particle.velY = Math.sin(direction) * magnitude;
+          scene.sprites.add(particle);
+          particles.add(particle);
+        }
+      }
+
+      // Update particles
+      for (const particle of particles) {
+        particle.velY -= gravity * dt;
+
+        particle.x += particle.velX * dt;
+        particle.y += particle.velY * dt;
       }
     }
 
