@@ -222,11 +222,22 @@ class Game {
       }
 
       // Update particles
+      const particlesToRemove = [];
       for (const particle of particles) {
         particle.velY -= gravity * dt;
 
         particle.x += particle.velX * dt;
         particle.y += particle.velY * dt;
+
+        if (particle.y + particle.radius < 0) {
+          particlesToRemove.push(particle);
+        }
+      }
+
+      // Remove particles
+      for (const particle of particlesToRemove) {
+        scene.sprites.delete(particle);
+        particles.delete(particle);
       }
     }
 
