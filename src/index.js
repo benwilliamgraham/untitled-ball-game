@@ -5,7 +5,7 @@ import Game from "./game.js";
 // Setup document
 document.body.style.backgroundColor = "rgb(219, 189, 145)";
 
-// Setup  canvas
+// Setup canvas
 const canvas = document.createElement("canvas");
 canvas.style.position = "absolute";
 canvas.style.top = "0";
@@ -14,6 +14,18 @@ canvas.style.borderRadius = "10px";
 canvas.width = 600;
 canvas.height = 800;
 document.body.appendChild(canvas);
+
+// Setup score div
+const score = document.createElement("div");
+score.style.position = "absolute";
+score.style.top = "0";
+score.style.left = "0";
+score.style.color = "white";
+score.style.fontFamily = "monospace";
+score.style.fontSize = "24px";
+score.style.padding = "10px";
+score.innerText = "Score: 0";
+document.body.appendChild(score);
 
 // Create info div
 const info = document.createElement("div");
