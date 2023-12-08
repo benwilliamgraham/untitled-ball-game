@@ -190,6 +190,9 @@ class Game {
         const x = (a.x + b.x) / 2;
         const y = (a.y + b.y) / 2;
 
+        const combinedVelX = (a.velX * a.mass + b.velX * b.mass) / (a.mass + b.mass);
+        const combinedVelY = (a.velY * a.mass + b.velY * b.mass) / (a.mass + b.mass);
+
         balls.delete(a);
         balls.delete(b);
         scene.sprites.delete(a);
@@ -202,6 +205,8 @@ class Game {
           y,
           levelHeirarchy[level].texture
         );
+        ball.velX = combinedVelX;
+        ball.velY = combinedVelY;
         balls.add(ball);
         scene.sprites.add(ball);
 
