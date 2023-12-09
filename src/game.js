@@ -7,8 +7,9 @@ import Ball from "./ball.js";
 import Particle from "./particle.js";
 
 class Game {
-  constructor(canvas, renderer) {
+  constructor(canvas, scoreboard, renderer) {
     this.canvas = canvas;
+    this.scoreboard = scoreboard;
     this.renderer = renderer;
 
     this.scene = new Scene(renderer);
@@ -17,13 +18,16 @@ class Game {
     this.particles = new Set();
   }
 
-  static async init(canvas) {
+  static async init(canvas, scoreboard) {
     const renderer = await Renderer.init(canvas);
-    return new Game(canvas, renderer);
+    return new Game(canvas, scoreboard, renderer);
   }
 
   play() {
-    const { canvas, renderer, scene, balls, particles } = this;
+    const { canvas, scoreboard, renderer, scene, balls, particles } = this;
+
+    // Create score
+    let score = 0;
 
     // Create floor
     const floorHeight = 20;
@@ -224,6 +228,12 @@ class Game {
           scene.sprites.add(particle);
           particles.add(particle);
         }
+
+        // Update score
+        score += 3 * (level + 1);
+
+        // Update scoreboard
+        scoreboard.innerText = "Score: " + score;
       }
 
       // Update particles

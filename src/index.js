@@ -16,16 +16,17 @@ canvas.height = 800;
 document.body.appendChild(canvas);
 
 // Setup score div
-const score = document.createElement("div");
-score.style.position = "absolute";
-score.style.top = "0";
-score.style.left = "0";
-score.style.color = "white";
-score.style.fontFamily = "monospace";
-score.style.fontSize = "24px";
-score.style.padding = "10px";
-score.innerText = "Score: 0";
-document.body.appendChild(score);
+const scoreboard = document.createElement("div");
+scoreboard.style.position = "absolute";
+scoreboard.style.top = "0";
+scoreboard.style.left = "0";
+scoreboard.style.color = "white";
+scoreboard.style.fontFamily = "monospace";
+scoreboard.style.fontSize = "24px";
+scoreboard.style.padding = "10px";
+scoreboard.style.userSelect = "none";
+scoreboard.innerText = "Score: 0";
+document.body.appendChild(scoreboard);
 
 // Create info div
 const info = document.createElement("div");
@@ -64,7 +65,7 @@ document.body.appendChild(info);
 
 // Main function
 async function main() {
-  const game = await Game.init(canvas);
+  const game = await Game.init(canvas, scoreboard);
   game.play();
 }
 
