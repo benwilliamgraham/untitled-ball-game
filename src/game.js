@@ -190,7 +190,7 @@ class Game {
 
       // Combine balls
       for (const [a, b] of combinedBalls) {
-        const level = Math.min(a.level + 1, 10);
+        const level = Math.min(a.level + 1, levelHeirarchy.length - 1);
         const x = (a.x + b.x) / 2;
         const y = (a.y + b.y) / 2;
 

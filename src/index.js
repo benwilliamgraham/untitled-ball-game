@@ -15,18 +15,34 @@ canvas.width = 600;
 canvas.height = 800;
 document.body.appendChild(canvas);
 
+// Setup canvas text div
+const canvasText = document.createElement("div");
+canvasText.style.position = "absolute";
+canvasText.style.top = "0";
+canvasText.style.left = "0";
+canvasText.style.width = canvas.width + "px";
+canvasText.style.color = "white";
+canvasText.style.fontFamily = "monospace";
+canvasText.style.fontSize = "24px";
+canvasText.style.padding = "0px";
+canvasText.style.userSelect = "none";
+document.body.appendChild(canvasText);
+
 // Setup score div
 const scoreboard = document.createElement("div");
 scoreboard.style.position = "absolute";
 scoreboard.style.top = "0";
 scoreboard.style.left = "0";
-scoreboard.style.color = "white";
-scoreboard.style.fontFamily = "monospace";
-scoreboard.style.fontSize = "24px";
-scoreboard.style.padding = "10px";
-scoreboard.style.userSelect = "none";
 scoreboard.innerText = "Score: 0";
-document.body.appendChild(scoreboard);
+canvasText.appendChild(scoreboard);
+
+// Setup next ball div
+const nextBallInfo = document.createElement("div");
+nextBallInfo.style.position = "absolute";
+nextBallInfo.style.top = "0";
+nextBallInfo.style.right = "0";
+nextBallInfo.innerText = "Next ball:";
+canvasText.appendChild(nextBallInfo);
 
 // Create info div
 const info = document.createElement("div");
@@ -65,7 +81,7 @@ document.body.appendChild(info);
 
 // Main function
 async function main() {
-  const game = await Game.init(canvas, scoreboard);
+  const game = await Game.init(canvas, scoreboard, nextBallInfo);
   game.play();
 }
 
