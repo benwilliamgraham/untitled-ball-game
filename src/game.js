@@ -61,7 +61,6 @@ class Game {
     const particleTexture = renderer.getTexture("src/textures/0.png");
 
     // Create dropper ball
-    const dropHeight = canvas.height - 75;
     let nextBall;
     
     function createNextBall() {
@@ -70,7 +69,7 @@ class Game {
         level,
         levelHeirarchy[level].radius,
         canvas.width / 2,
-        dropHeight,
+        canvas.height + levelHeirarchy[level].radius,
         levelHeirarchy[level].texture
       );
       nextBallImg.src = levelHeirarchy[level].texture.src;
