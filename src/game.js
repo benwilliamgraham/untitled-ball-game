@@ -7,9 +7,10 @@ import Ball from "./ball.js";
 import Particle from "./particle.js";
 
 class Game {
-  constructor(canvas, scoreboard, renderer) {
+  constructor(canvas, scoreboard, nextBallImg, renderer) {
     this.canvas = canvas;
     this.scoreboard = scoreboard;
+    this.nextBallImg = nextBallImg;
     this.renderer = renderer;
 
     this.scene = new Scene(renderer);
@@ -18,13 +19,13 @@ class Game {
     this.particles = new Set();
   }
 
-  static async init(canvas, scoreboard) {
+  static async init(canvas, scoreboard, nextBallImg) {
     const renderer = await Renderer.init(canvas);
-    return new Game(canvas, scoreboard, renderer);
+    return new Game(canvas, scoreboard, nextBallImg, renderer);
   }
 
   play() {
-    const { canvas, scoreboard, renderer, scene, balls, particles } = this;
+    const { canvas, scoreboard, nextBallImg, renderer, scene, balls, particles } = this;
 
     // Create score
     let score = 0;
@@ -72,7 +73,7 @@ class Game {
         dropHeight,
         levelHeirarchy[level].texture
       );
-      scene.sprites.add(nextBall);
+      nextBallImg.src = "src/textures/" + level + ".png";
     }
     createNextBall();
 
@@ -86,10 +87,11 @@ class Game {
       const x = event.clientX - rect.left;
 
       nextBall.x = x;
+      scene.sprites.add(nextBall);
       balls.add(nextBall);
       nextBall = null;
 
-      setTimeout(createNextBall, 400);
+      createNextBall();
     });
 
     // Create physics loop

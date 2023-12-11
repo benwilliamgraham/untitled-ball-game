@@ -24,7 +24,6 @@ canvasText.style.width = canvas.width + "px";
 canvasText.style.color = "white";
 canvasText.style.fontFamily = "monospace";
 canvasText.style.fontSize = "24px";
-canvasText.style.padding = "0px";
 canvasText.style.userSelect = "none";
 document.body.appendChild(canvasText);
 
@@ -33,16 +32,24 @@ const scoreboard = document.createElement("div");
 scoreboard.style.position = "absolute";
 scoreboard.style.top = "0";
 scoreboard.style.left = "0";
+scoreboard.style.padding = "12px";
 scoreboard.innerText = "Score: 0";
 canvasText.appendChild(scoreboard);
 
 // Setup next ball div
-const nextBallInfo = document.createElement("div");
-nextBallInfo.style.position = "absolute";
-nextBallInfo.style.top = "0";
-nextBallInfo.style.right = "0";
-nextBallInfo.innerText = "Next ball:";
-canvasText.appendChild(nextBallInfo);
+const nextBall = document.createElement("div");
+nextBall.style.position = "absolute";
+nextBall.style.top = "0";
+nextBall.style.right = "0";
+nextBall.style.padding = "2.5px";
+nextBall.innerText = "Next ball:";
+canvasText.appendChild(nextBall);
+
+const nextBallImg = document.createElement("img");
+nextBallImg.style.width = "50px";
+nextBallImg.style.height = "50px";
+nextBallImg.style.verticalAlign = "middle";
+nextBall.appendChild(nextBallImg);
 
 // Create info div
 const info = document.createElement("div");
@@ -81,7 +88,7 @@ document.body.appendChild(info);
 
 // Main function
 async function main() {
-  const game = await Game.init(canvas, scoreboard, nextBallInfo);
+  const game = await Game.init(canvas, scoreboard, nextBallImg);
   game.play();
 }
 
