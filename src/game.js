@@ -73,7 +73,7 @@ class Game {
         dropHeight,
         levelHeirarchy[level].texture
       );
-      nextBallImg.src = "src/textures/" + level + ".png";
+      nextBallImg.src = levelHeirarchy[level].texture.src;
     }
     createNextBall();
 
