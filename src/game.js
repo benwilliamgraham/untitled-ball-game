@@ -137,7 +137,7 @@ class Game {
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < ball.radius + otherBall.radius) {
-            if (ball.level === otherBall.level) {
+            if (ball.level === otherBall.level && ball.level < levelHeirarchy.length - 1) {
               combinedBalls.push([ball, otherBall]);
             } else {
               collidingBalls.push([ball, otherBall]);
