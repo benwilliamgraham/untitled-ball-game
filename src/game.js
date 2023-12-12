@@ -42,6 +42,18 @@ class Game {
     );
     scene.sprites.add(floor);
 
+    // Create upper bound
+    const upperBoundHeight = canvas.height - 60;
+    const upperBound = new Sprite(
+      canvas.width,
+      6,
+      canvas.width / 2,
+      upperBoundHeight,
+      0,
+      renderer.getTexture("src/textures/bound.png")
+    );
+    scene.sprites.add(upperBound);
+
     // Create ball hierarchy
     const levelHeirarchy = [
       { radius: 30, texture: renderer.getTexture("src/textures/0.png") },
@@ -78,10 +90,6 @@ class Game {
 
     // Setup input
     canvas.addEventListener("click", (event) => {
-      if (nextBall === null) {
-        return;
-      }
-
       const rect = canvas.getBoundingClientRect();
       const x = event.clientX - rect.left;
 
